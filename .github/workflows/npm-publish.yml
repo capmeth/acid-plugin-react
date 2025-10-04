@@ -21,8 +21,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: install deps
         run: npm ci
-      - name: rewrite config
-        run: node repackage
       - name: publish
         run: npm publish --access public
         env:
