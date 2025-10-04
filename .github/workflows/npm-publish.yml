@@ -1,0 +1,29 @@
+
+name: Publish Plugin
+
+on:
+  release:
+    types: [ published ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+          registry-url: https://registry.npmjs.org/
+      - name: install deps
+        run: npm ci
+      - name: rewrite config
+        run: node repackage
+      - name: publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.CAPTISON_NPM_TOKEN }}
