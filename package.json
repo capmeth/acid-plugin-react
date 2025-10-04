@@ -24,5 +24,9 @@
         ".": "./source/index.js",
         "./parser": "./source/parser.js",
         "./renderer": "./source/renderer.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/capmeth/acid-plugin-react.git"
     }
 }
