@@ -19,19 +19,18 @@ npm install @captison/acid-plugin-react --save-dev
 
 Add as an extension.
 
-```js
-import acid from '@captison/acid'
-import acidReact from '@captison/acid-plugin-react'
-
-let docsite = acid();
-docsite.use(acidReact);
+```js label="acid.config.js"
+{
+    configs: [ "@captison/acid-plugin-react" ]
+}
 ```
 
 Parser and renderer records will be applied to the ACID configuration automatically.
 
-Parser and renderer are also manually accessible.
+The extension and the parser and renderer are all individually accessible.
 
 ```js
+import acidReact from '@captison/acid-plugin-react'
 import acidReactParser from '@captison/acid-plugin-react/parser'
 import acidReactRenderer from '@captison/acid-plugin-react/renderer'
 ```
@@ -42,17 +41,24 @@ import acidReactRenderer from '@captison/acid-plugin-react/renderer'
 Here are the config options with their defaults.
 
 ```js
-docsite.use(acidReact, 
 {
-    // source file types for parsing
-    exts: '.jsx',
-    // language types for code blocks
-    types: [ 'jsx', 'react' ],
-    // module specifier for the renderer (added to importmap)
-    specifier: 'react-render',
-    // output file name for the renderer
-    filename: 'acid-react-render.js'
-});
+    configs: 
+    [ 
+        [ 
+            '@captison/acid-plugin-react',
+            {
+                // source file types for parsing
+                exts: '.jsx',
+                // language types for code blocks
+                types: [ 'jsx', 'react' ],
+                // module specifier for the renderer (added to importmap)
+                specifier: 'react-render',
+                // output file name for the renderer
+                filename: 'acid-react-render.js'
+            }             
+        ]
+    ]
+}
 ```
 
 The parser and renderer extensions themselves do not have config parameters nor do they orient themselves based on language type.
