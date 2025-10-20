@@ -11,11 +11,11 @@ export default function (config, param)
     specifier ||= 'react-render';
     filename ||= 'acid-react-render.js';
 
-    copy.unshift({ files: path.join(import.meta.dirname, 'renderer.js'), to: filename });
+    copy.unshift({ files: path.resolve('__plugin_dirname', './renderer.js'), to: filename });
 
     cobe.push({ types, use: specifier });
 
-    parsers.push({ types: exts, use: path.join(import.meta.dirname, 'parser.js') });
+    parsers.push({ types: exts, use: '@captison/acid-plugin-react/parser' });
 
     // babel loaded globally as "Babel"
     scripts.push('https://unpkg.com/@babel/standalone@7/babel.min.js');
@@ -24,6 +24,6 @@ export default function (config, param)
     {
         "react": "https://esm.sh/react@19",
         "react-dom/client": "https://esm.sh/react-dom@19/client",
-        [specifier]: `./${filename}`
+        [specifier]: `/${filename}`
     };
 }
